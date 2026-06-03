@@ -1,0 +1,36 @@
+version: '1.0'
+
+services:
+  drivers_api:
+    container_name: drivers_api_container
+    build:
+      context: .
+    ports:
+      - "8072:8072"
+    volumes:
+      - .:/app
+    networks:
+      - drivers_network
+
+  drivers_db:
+    container_name: drivers_db_container
+    image: postgres:15
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - drivers_db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: delivery_system
+    networks:
+      - drivers_network
+    ports:
+      - "5432:5432" 
+
+volumes:
+  drivers_db_data:
+
+networks:
+  drivers_network:
+    external: true
