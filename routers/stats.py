@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, Depends
+from fastapi import APIRouter, Query, Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import desc, select, func, case
 from datetime import date
@@ -7,6 +7,7 @@ from models import (
     RoutePointStatusLog, User, Vehicle, RoutePlan, RoutePoint, RoutePointStatusEnum
 )
 from sqlalchemy.sql import over
+from utils.error_logger import log_system_error
 
 router = APIRouter(prefix="/statistics", tags=["Статистика"])
 
