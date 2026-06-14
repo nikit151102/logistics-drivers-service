@@ -11,6 +11,7 @@ services:
       - .:/app
     networks:
       - drivers_network
+      - common
 
   drivers_db:
     container_name: drivers_db_container
